@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block style %}      
+ <link rel="stylesheet" href="{% static 'style.css' %}" >
+{% endblock  %}
+{% block content %}
+<a href="{% url 'logout' %}" class="p-5 float-left ">LogOut</a>
+<a href="{% url 'createPost' %}" class="p-5 float-right">Create Post</a>
+
+<h1 class="text-center text-danger">Profiles</h1>
+<div class="container">
+    <img src="{{profile.image}}" id="image" 
+    class="rounded-circle text-center mt-3" 
+    width="250px" height="250px"/>
+    <h1 class="text-center text-primary">Name  :   {{profile.user.username}} </h1>
+    <h4  class="text-center text-dark">Bio  :   {{profile.bio}} </h4> 
+    <h4  class="text-center text-dark">Friends :   {{profile.friends.count}} </h4> 
+
+    <a href= "{% url 'editProfile' %}" class="d-block text-center  text-danger">Edit Profile</a>
+    <a href= "{% url 'createPost' %}" class="d-block text-center  text-danger">create Post</a>
+    <a href= "{% url 'allUser' %}" class="d-block text-center  text-danger">AllUser</a>
+    <a href= "{% url 'Notifications' %}" class="d-block text-center  text-danger">Notifications</a>
+
+
+
+</div>
+
+<div class="container">
+        <h1 class="text-center text-danger">All Posts</h1>
+    {% for post in posts %}
+        <div class="border text-center">
+            <p class="text-dark">{{post.text}}</p>
+            <p class="text-dark">{{post.date}}</p>
+        </div>
+    {% endfor %}
+</div>
+{% endblock  %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="text-danger text-center">   Login  </h1>
+    <a href="{% url 'signup' %}"> signup </a>
+    {% if messages %}
+        {% for message in messages %}
+            <h4 class="text-danger text-center"> {{message}} </h4>
+        {% endfor %}
+    {% endif %}
+    <div class ="container class1">
+        <form action="" method="POST" class="form">
+        {% csrf_token %}
+            <input type="text" placeholder ="username" name="username">
+            <br/>
+            <input type="password" placeholder ="password" name="password" >
+            <input type="submit" value="submit">
+        </form
+
+        
+    </div>
+
+{% endblock  %}

@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+ {% load static %}
+{% block style %}
+    <script src="{% static 'main1.js' %}" defer ></script>
+{% endblock %} 
+{% block content %}
+
+<h1 class="text-center text-danger">Friends</h1>
+<div class="container">
+
+{% if userFriends.friends.count > 0  %}
+
+  {% for user in userFriends.friends.all %}
+    <div class="text-center p-5 border mb-2">
+        <h1>{{user.username}} </h1>
+        <p>{{user.email}} </p>
+        <form class="formUnfriend" data-id="{{user.id}}" >
+        {% csrf_token %}
+            <button id="userBtn">UnFriends</button> 
+        </form> 
+    </div>
+  {% endfor %}
+{% else %}
+  <h1 class="text-center"> You dont have Friends </h1>
+{% endif %}
+</div>
+ 
+
+  <h1 class="text-danger text-center"> All User </h1>
+  <div class="container">
+    {% for user in userfind %}
+    {% for i in user %}
+     <div class="text-center p-5 border mb-2">
+        <h1>{{i.user.username}} </h1>
+        <p>{{i.user.email}} </p>
+        <form class="formUser" data-id="{{i.id}}" >
+        {% csrf_token %}
+            <button id="userBtn">Add Friends</button>
+        </form> 
+    </div>
+    {% endfor %}
+    {% endfor %}
+</div> 
+
+
+  {% comment %} {% for user in user %}
+    {% if   %} 
+    <div class="text-center p-5 border mb-2">
+        <h1>{{user.user.username}} </h1>
+        <p>{{user.user.email}} </p>
+        <form class="formUnfriend" data-id="{{user.id}}" >
+        {% csrf_token %}
+            <button id="userBtn">UnFriends</button> 
+        </form> 
+    </div>
+    {% else %}
+    <div class="text-center p-5 border mb-2">
+        <h1>{{user.user.username}} </h1>
+        <p>{{user.user.email}} </p>
+        <form class="formUser" data-id="{{user.id}}" >
+        {% csrf_token %}
+            <button id="userBtn">Add Friends</button>
+        </form> 
+    </div>
+    {% endif %}
+  {% endfor %}
+</div> {% endcomment %}
+
+{% endblock %}

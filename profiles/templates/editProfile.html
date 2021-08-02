@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+ {% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+{% endblock %} 
+{% block content %}
+
+<h1 class="text-center text-danger">Edit Profiles</h1>
+<div class="container">
+  <form
+    action="{% url 'editProfile' %}"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    {% csrf_token %}
+   username :  <input type="text" value="{{profile.user.username}}" name="username" /><br/>
+    email : <input type="email" value="{{profile.user.email}}" name="email" /><br/>
+   Image :  <input type="file"  name="image"  /><br/>
+      you must choose your pictures
+   bio : <input type="text" value="{{profile.bio}}" name="bio" /><br/>
+    <input type="submit" value="Submit" />
+  </form>
+</div>
+
+{% endblock %}

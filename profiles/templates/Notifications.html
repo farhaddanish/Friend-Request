@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block style %}      
+ <link rel="stylesheet" href="{% static 'style1.css' %}" >
+ <script  src="{% static 'main1.js' %}" defer ></script>
+{% endblock  %}
+{% block content %}
+<h1 class="text-danger text-center"> Notifications </h1>
+<div class="container">
+    {% for user in filter %}
+    <div class="general{{user.fromuser.id}}" >
+        <h1> {{user.fromuser}} </h1>
+        <form class="form_accept" data-id="{{user.fromuser.id}}" data-user-id="{{user.id}}">
+            {% csrf_token %}
+            <button type="submit" id="accept" >Accept </button>
+        </form>
+        <form class="form_denied" data-id="{{user.fromuser.id}}" data-user-id="{{user.id}}">
+            {% csrf_token %}
+            <button type="submit" id="denied" >Denied </button>
+        </form>
+    </div>
+    
+    {% endfor %}
+</div>
+
+
+<h1 class="text-danger text-center"> Previous  Notifications </h1>
+<div class="container" >
+    {% for user in savedNotifaction %}
+        <div class="text-center">
+            <h1>{{user.formUser}} </h1>
+            {% if user.accept %}
+                <p>Friend Request accepted</p>
+            {% else %}
+                <p>Friend Request denied </p>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+{% endblock  %}
